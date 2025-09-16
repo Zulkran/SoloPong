@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     background-color: black;
     text-align: center;
     align-items: center;
