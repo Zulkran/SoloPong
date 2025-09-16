@@ -1,6 +1,8 @@
 body {
+    display: block;
     background-color: black;
     text-align: center;
+    margin: auto;
 }
 
 header {
