@@ -163,6 +163,26 @@ rightButton.addEventListener("mouseleave", () => {
     clearInterval(rightInteval);
 })
 
+// Event Mobile
+leftButton.addEventListener("touchstart", () => {
+    clearInterval(leftInterval);
+    leftInterval = setInterval(() => {
+        changedBar(0, 5);
+    }, 20);
+})
+rightButton.addEventListener("touchstart", () => {
+    clearInterval(rightInteval);
+    rightInteval = setInterval(() => {
+        changedBar(5, 0);
+    }, 20);
+})
+
+leftButton.addEventListener("touchend", () => {
+    clearInterval(leftInterval);
+})
+rightButton.addEventListener("touchend", () => {
+    clearInterval(rightInteval);
+})
 
 
 // Affichage de base
