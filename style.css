@@ -20,7 +20,10 @@ main {
 #pong {
     border: 0.5rem solid cyan;
     border-radius: 2rem;
-    margin: 1rem auto;
+    margin: 2rem auto;
+    display: block;
+    max-width: 90%;
+    height: auto;
 }
 
 #controls > button {
