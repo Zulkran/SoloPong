@@ -5,19 +5,24 @@ const scoreDisplay = document.getElementById("score");
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 
-// Ball dimension and position
-let x = canvas.width / 2;
-let y = canvas.height / 2;
-let dx = 2;
-let dy= -2;
-const rayonBall = 10;
-
 // Player characteristics
 const paddle_thickness = 10;
 const paddle_width = 100;
 let XpaddlePosition = canvas.width / 2 - paddle_width / 2;
 const YpaddlePosition = canvas.height * (9/10);
 
+// Ball dimension and position
+let x = canvas.width / 2;
+let y = YpaddlePosition - 30;
+let dx = 2;
+if(Math.floor(Math.random() * 2) == 1) {
+    dx = 2;
+}
+else {
+    dx = -2;
+}
+let dy= -2;
+const rayonBall = 10;
 
 // Time intervalle Game
 let intervalle;
@@ -84,8 +89,13 @@ function changedBar(right, left) {
 
 function resetGame() {
     x = canvas.width / 2;
-    y = canvas.height / 2;
-    dx = 2;
+    y = YpaddlePosition - 30;
+    if(Math.floor(Math.random() * 2) == 1) {
+        dx = 2;
+    }
+    else {
+        dx = -2;
+    }
     dy= -2;
 
     XpaddlePosition = canvas.width / 2 - paddle_width / 2;
