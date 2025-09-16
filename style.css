@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+}
+
+header {
+    color: white;
+}
+
+main {
+    color: white;
+}
+
+#pong {
+    border: 1px solid cyan;
+    width: 400px;
+    height: 600px;
+}
+
+#controls > button {
+    width: 10%;
+}
