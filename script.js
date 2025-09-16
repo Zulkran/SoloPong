@@ -82,8 +82,13 @@ function changedBall() {
 }
 
 function changedBar(right, left) {
-    XpaddlePosition += right;
-    XpaddlePosition -= left;
+    if((XpaddlePosition + paddle_width + right) > canvas.width || (XpaddlePosition - left) < 0) {
+        ;
+    }
+    else {
+        XpaddlePosition += right;
+        XpaddlePosition -= left;
+    }
     drawBar();
 }
 
@@ -129,6 +134,33 @@ leftButton.addEventListener("click", () => {
 })
 rightButton.addEventListener("click", () => {
     changedBar(20, 0);
+})
+
+let leftInterval;
+let rightInteval;
+leftButton.addEventListener("mousedown", () => {
+    clearInterval(leftInterval);
+    leftInterval = setInterval(() => {
+        changedBar(0, 5);
+    }, 20);
+})
+rightButton.addEventListener("mousedown", () => {
+    clearInterval(rightInteval);
+    rightInteval = setInterval(() => {
+        changedBar(5, 0);
+    }, 20);
+})
+leftButton.addEventListener("mouseup", () => {
+    clearInterval(leftInterval);
+})
+leftButton.addEventListener("mouseleave", () => {
+    clearInterval(leftInterval);
+})
+rightButton.addEventListener("mouseup", () => {
+    clearInterval(rightInteval);
+})
+rightButton.addEventListener("mouseleave", () => {
+    clearInterval(rightInteval);
 })
 
 
