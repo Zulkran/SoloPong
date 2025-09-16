@@ -5,6 +5,7 @@
     <title>Solo Pong</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
+    <script src="https://kit.fontawesome.com/ed4b06e923.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -13,14 +14,24 @@
     <main>
         <p>Joue le plus longtemps possible</p>
 
-        <canvas id="pong"> Votre navigateur ne supporte pas Canvas.</canvas>
+        <div id="game">
+            <canvas id="pong" width="400px" height="600px"> Votre navigateur ne supporte pas Canvas.</canvas>
+        </div>
 
-        <button id="newGame">Nouvelle partie</button>
-        <p>Score : 0 s</p>
+        <div id="play">
+            <button id="newGame">Nouvelle partie</button>
+            <p id="score">Score : 0 s</p>
+        </div>
+
         <div id="controls">
-            <button id="left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 105.4-105.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button>
-            <button id="right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
+            <button id="left"><i class="fa-solid fa-arrow-left"></i></button>
+            <button id="right"><i class="fa-solid fa-arrow-right"></i></svg></button>
         </div>
     </main>
+
+    <footer>
+        <p>Projet individuel - JavaScript</p>
+        <p>Mary Ilhan</p>
+    </footer>
 </body>
 </html>

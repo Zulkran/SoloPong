@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    text-align: center;
 }
 
 header {
@@ -11,11 +12,27 @@ main {
 }
 
 #pong {
-    border: 1px solid cyan;
-    width: 400px;
-    height: 600px;
+    border: 0.5rem solid cyan;
+    border-radius: 2rem;
 }
 
 #controls > button {
-    width: 10%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 4rem;
+    width: 4rem;
+    border: solid 1px cyan;
+    border-radius: 10rem;
+}
+
+#newGame {
+    border-radius: 2rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+footer {
+    margin-top: 1rem;
+    color: white;
 }
