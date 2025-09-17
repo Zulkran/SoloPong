@@ -14,14 +14,8 @@ const YpaddlePosition = canvas.height * (9/10);
 // Ball dimension and position
 let x = canvas.width / 2;
 let y = YpaddlePosition - 30;
-let dx = 2;
-if(Math.floor(Math.random() * 2) == 1) {
-    dx = 2;
-}
-else {
-    dx = -2;
-}
-let dy= -2;
+let dx;
+let dy;
 const rayonBall = 10;
 
 // Time intervalle Game
@@ -33,13 +27,10 @@ let compteur = 0;
 let timeScore = 0;
 
 function drawBar() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
     ctx.fillRect(XpaddlePosition, YpaddlePosition, paddle_width, paddle_thickness);
 }
 
 function drawBall() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.arc(x, y, rayonBall, 0, Math.PI * 2, false);
     ctx.fillStyle = "white";
@@ -69,8 +60,6 @@ function changedBall() {
     if (y + dy + rayonBall > canvas.height){
         clearInterval(intervalle);
         resetGame();
-        drawBall();
-        drawBar();
     }
 
     // Touch Bar
@@ -111,8 +100,8 @@ function resetGame() {
 
 function game() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
     drawBar();
+    drawBall();
     changedBall();
 
     compteur++;
@@ -147,15 +136,11 @@ rightButton.addEventListener("mousedown", () => {
 leftButton.addEventListener("mouseup", () => {
     clearInterval(leftInterval);
 })
-leftButton.addEventListener("mouseleave", () => {
-    clearInterval(leftInterval);
-})
+
 rightButton.addEventListener("mouseup", () => {
     clearInterval(rightInteval);
 })
-rightButton.addEventListener("mouseleave", () => {
-    clearInterval(rightInteval);
-})
+
 
 // Event Mobile
 leftButton.addEventListener("touchstart", () => {
@@ -182,3 +167,4 @@ rightButton.addEventListener("touchend", () => {
 // Affichage de base
 drawBall();
 drawBar();
+resetGame();
