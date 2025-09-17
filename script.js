@@ -122,13 +122,11 @@ newGameButton.addEventListener("click", () => {
 let leftInterval;
 let rightInteval;
 leftButton.addEventListener("mousedown", () => {
-    clearInterval(leftInterval);
     leftInterval = setInterval(() => {
         changedBar(0, 5);
     }, 20);
 })
 rightButton.addEventListener("mousedown", () => {
-    clearInterval(rightInteval);
     rightInteval = setInterval(() => {
         changedBar(5, 0);
     }, 20);
@@ -144,13 +142,11 @@ rightButton.addEventListener("mouseup", () => {
 
 // Event Mobile
 leftButton.addEventListener("touchstart", () => {
-    clearInterval(leftInterval);
     leftInterval = setInterval(() => {
         changedBar(0, 5);
     }, 20);
 })
 rightButton.addEventListener("touchstart", () => {
-    clearInterval(rightInteval);
     rightInteval = setInterval(() => {
         changedBar(5, 0);
     }, 20);
