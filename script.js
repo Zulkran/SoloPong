@@ -130,12 +130,6 @@ function startGame() {
 newGameButton.addEventListener("click", () => {
     startGame();
 })
-leftButton.addEventListener("click", () => {
-    changedBar(0, 20);
-})
-rightButton.addEventListener("click", () => {
-    changedBar(20, 0);
-})
 
 let leftInterval;
 let rightInteval;
