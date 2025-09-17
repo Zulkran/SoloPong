@@ -54,10 +54,10 @@ function changedBall() {
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
     }
-    if (y + dy - rayonBall < 0) {
+    else if (y + dy - rayonBall < 0) {
         dy = -dy;
     }
-    if (y + dy + rayonBall > canvas.height){
+    else if (y + dy + rayonBall > canvas.height){
         clearInterval(intervalle);
         resetGame();
     }
@@ -68,6 +68,8 @@ function changedBall() {
             dy = -dy;
         }
     }
+
+    drawBall();
 }
 
 function changedBar(right, left) {
@@ -78,7 +80,6 @@ function changedBar(right, left) {
         XpaddlePosition += right;
         XpaddlePosition -= left;
     }
-    drawBar();
 }
 
 function resetGame() {
@@ -101,7 +102,6 @@ function resetGame() {
 function game() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBar();
-    drawBall();
     changedBall();
 
     compteur++;
