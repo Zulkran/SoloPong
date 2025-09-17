@@ -90,7 +90,6 @@ function changedBar(right, left) {
         XpaddlePosition -= left;
     }
     drawBar();
-    drawBall();
 }
 
 function resetGame() {
