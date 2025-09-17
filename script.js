@@ -53,9 +53,11 @@ function changedBall() {
     // Touch canvas border
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
+        dx > 0 ? dx+=0.1 : dx-=0.1;
     }
     else if (y + dy - rayonBall < 0) {
         dy = -dy;
+        dy > 0 ? dy+=0.1 : dy-=0.1;
     }
     else if (y + dy + rayonBall > canvas.height){
         clearInterval(intervalle);
@@ -69,7 +71,7 @@ function changedBall() {
         }
     }
 
-    drawBall();
+
 }
 
 function changedBar(right, left) {
@@ -102,6 +104,7 @@ function resetGame() {
 function game() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBar();
+    drawBall();
     changedBall();
 
     compteur++;
@@ -123,12 +126,12 @@ let leftInterval;
 let rightInteval;
 leftButton.addEventListener("mousedown", () => {
     leftInterval = setInterval(() => {
-        changedBar(0, 5);
+        changedBar(0, 10);
     }, 20);
 })
 rightButton.addEventListener("mousedown", () => {
     rightInteval = setInterval(() => {
-        changedBar(5, 0);
+        changedBar(10, 0);
     }, 20);
 })
 leftButton.addEventListener("mouseup", () => {
@@ -138,17 +141,24 @@ leftButton.addEventListener("mouseup", () => {
 rightButton.addEventListener("mouseup", () => {
     clearInterval(rightInteval);
 })
+leftButton.addEventListener("mouseleave", () => {
+    clearInterval(leftInterval);
+})
+
+rightButton.addEventListener("mouseleave", () => {
+    clearInterval(rightInteval);
+})
 
 
 // Event Mobile
 leftButton.addEventListener("touchstart", () => {
     leftInterval = setInterval(() => {
-        changedBar(0, 5);
+        changedBar(0, 10);
     }, 20);
 })
 rightButton.addEventListener("touchstart", () => {
     rightInteval = setInterval(() => {
-        changedBar(5, 0);
+        changedBar(10, 0);
     }, 20);
 })
 
