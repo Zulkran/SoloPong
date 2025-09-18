@@ -54,10 +54,12 @@ function changedBall() {
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
         dx > 0 ? dx+=0.1 : dx-=0.1;
+        drawBall();
     }
     else if (y + dy - rayonBall < 0) {
         dy = -dy;
         dy > 0 ? dy+=0.1 : dy-=0.1;
+        drawBall();
     }
     else if (y + dy + rayonBall > canvas.height){
         clearInterval(intervalle);
@@ -82,6 +84,7 @@ function changedBar(right, left) {
         XpaddlePosition += right;
         XpaddlePosition -= left;
     }
+    drawBar();
 }
 
 function resetGame() {
