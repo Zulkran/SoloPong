@@ -84,6 +84,8 @@ function changedBar(right, left) {
         XpaddlePosition += right;
         XpaddlePosition -= left;
     }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBall();
     drawBar();
 }
 
