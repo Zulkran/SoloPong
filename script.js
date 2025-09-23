@@ -6,11 +6,12 @@ const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 
 // Player characteristics
-const paddle_thickness = 10;
+const paddle_thickness = 7;
 const paddle_width = 100;
 let XpaddlePosition = canvas.width / 2;
 const YpaddlePosition = canvas.height * (9.5/10);
 const paddle_speed = 10;
+const radius = paddle_thickness / 2;
 
 // Déplacement
 let rightChanged = false;
@@ -27,19 +28,32 @@ const rayonBall = 10;
 let animationGame;
 
 // Score
-let compteur = 0;
-let timeScore = 0;
+let start;
 
 function draw() {
     // Draw Ball
     ctx.beginPath();
 
     ctx.arc(x, y, rayonBall, 0, Math.PI * 2, false);
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "rgb(192, 42, 252)";
     ctx.fill();
 
     // Draw Bar 
     ctx.fillRect(XpaddlePosition - paddle_width / 2, YpaddlePosition, paddle_width, paddle_thickness);
+
+    ctx.moveTo(XpaddlePosition - paddle_width / 2 + radius, YpaddlePosition); // Début à gauche
+    ctx.lineTo(XpaddlePosition + paddle_width / 2 - radius, YpaddlePosition); // Ligne droite
+    ctx.arcTo(
+        XpaddlePosition + paddle_width / 2, YpaddlePosition, 
+        XpaddlePosition + paddle_width / 2, YpaddlePosition + radius, 
+        radius
+    ); // Arrondi à droite
+    ctx.lineTo(XpaddlePosition - paddle_width / 2 + radius, YpaddlePosition + paddle_thickness); // Ligne en bas
+    ctx.arcTo(
+        XpaddlePosition - paddle_width / 2, YpaddlePosition + paddle_thickness, 
+        XpaddlePosition - paddle_width / 2, YpaddlePosition, 
+        radius
+    ); // Arrondi à gauche 
 }
 
 function update() {
@@ -66,23 +80,24 @@ function update() {
     }
 
     // Changed Touch Bar
-    if(y >= YpaddlePosition && y <= YpaddlePosition + paddle_thickness) {
-        if(x >= XpaddlePosition - paddle_width / 2 && x <= XpaddlePosition + paddle_width / 2){
-            dy = -dy;
-        }
+    if(y + rayonBall >= YpaddlePosition && y <= YpaddlePosition + paddle_thickness && x + rayonBall >= XpaddlePosition - paddle_width / 2 && x <= XpaddlePosition + paddle_width / 2) {
+        dy = -dy;
     }
+
+    // Update Score
+    scoreDisplay.textContent = "Score : " + Math.floor((Date.now() - start)/1000) + " s";
 }
 
 function resetGame() {
     x = canvas.width / 2;
     y = YpaddlePosition - 30;
     if(Math.floor(Math.random() * 2) == 1) {
-        dx = 2;
+        dx = 4;
     }
     else {
-        dx = -2;
+        dx = -4;
     }
-    dy= -2;
+    dy= -4;
 
     XpaddlePosition = canvas.width / 2;
 
@@ -104,6 +119,7 @@ function game() {
 newGameButton.addEventListener("click", () => {
     scoreDisplay.textContent = "Score : " + 0 + " s";
     resetGame();
+    start = Date.now();
     game();
 })
 

@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #1F2937;
     text-align: center;
     align-items: center;
     margin: 0;
@@ -10,6 +10,11 @@ body {
 header {
     color: white;
     text-align: center;
+    font-weight: bold;
+}
+
+header > p {
+    font-style: italic;
 }
 
 main {
@@ -18,20 +23,21 @@ main {
 }
 
 #pong {
-    border: 0.5rem solid cyan;
+    border: 0.5rem solid rgb(218, 125, 255);
     border-radius: 2rem;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     display: block;
     max-width: 90%;
     height: auto;
+    background-color: rgb(199, 199, 199);
 }
 
-#controls > button {
+#controls > .controls {
     margin-left: 2rem;
     margin-right: 2rem;
     height: 4rem;
     width: 4rem;
-    border: solid 1px cyan;
+    border: solid 1px;
     border-radius: 10rem;
 }
 
@@ -42,16 +48,21 @@ main {
 #newGame {
     border-radius: 2rem;
     font-size: 1rem;
-    padding: 0.75rem;
-    margin-top: 0.5rem;
+    padding: 1rem;
+    margin-top: 0.25rem;
+    font-weight: bold;
 }
 
 footer {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     color: white;
     margin: auto;
 }
 
 #play {
     margin: auto;
+}
+
+#score {
+    font-size: 1.5rem;
 }
