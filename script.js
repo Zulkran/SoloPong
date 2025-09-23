@@ -116,6 +116,7 @@ function game() {
     animationGame = requestAnimationFrame(game);
 }
 
+// Lancement du jeu
 newGameButton.addEventListener("click", () => {
     scoreDisplay.textContent = "Score : " + 0 + " s";
     resetGame();
