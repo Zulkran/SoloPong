@@ -4,6 +4,8 @@ const newGameButton = document.getElementById("newGame");
 const scoreDisplay = document.getElementById("score");
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
+let storage = localStorage;
+storage.setItem("best", 0);
 
 // Player characteristics
 const paddle_thickness = 10;
@@ -23,13 +25,15 @@ let y = YpaddlePosition - 30;
 let dx;
 let dy;
 const rayonBall = 10;
-const ballSpeed = canvas.width / 100;
+let XBallSpeed;
+const YBallSpeed = 5;
 
 // Animation Game
 let animationGame;
 
 // Score
 let start;
+let score;
 
 function draw() {
     // Draw Ball
@@ -46,6 +50,10 @@ function draw() {
 }
 
 function update() {
+    // Update Score
+    score = Math.floor((Date.now() - start)/1000);
+    scoreDisplay.textContent = "Score : " + score + " s";
+
     // Changed bar coordonate
     if(rightChanged == true && (XpaddlePosition + paddle_width / 2) < canvas.width) XpaddlePosition += paddle_speed;
     if(leftChanged == true && (XpaddlePosition - paddle_width / 2) > 0) XpaddlePosition -= paddle_speed;
@@ -54,53 +62,62 @@ function update() {
     x += dx;
     y += dy;
 
+    // Checking that the ball does not stay vertical
+    while(XBallSpeed > -0.5 && XBallSpeed < 0.5) {
+        XBallSpeed = Math.random() * (4 - 2) + 2;
+    }
+
     // Touch canvas border
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
-        dx > 0 && (dx <= ballSpeed*5 || -dx <= ballSpeed*5) ? dx+=0.5 : dx-=0.5;
+        if(dx**2 < XBallSpeed**2*5) {
+            dx = dx*1.05;
+        }
     }
     else if (y + dy - rayonBall < 0) {
         dy = -dy;
-        dy > 0 && (dy <= ballSpeed*5 || -dy <= ballSpeed*5) ? dy+=0.5 : dy-=0.5;
+        if(dy**2 < YBallSpeed**2*5) {
+            dy = dy*1.05;
+        }
     }
     // Finish Game
     else if (y + rayonBall > canvas.height){
         resetGame();
+        score = Math.floor((Date.now() - start)/1000);
+        scoreDisplay.textContent = "Perdu votre score est de : " + score + " s";
+        if(storage.getItem("best") < score) {
+            storage.setItem("best", score);
+            console.log("Best score : ", storage.getItem("best"));
+        }
     }
 
     // Changed Touch Bar
     if(y + rayonBall >= YpaddlePosition && y <= YpaddlePosition + paddle_thickness && x + rayonBall >= XpaddlePosition - paddle_width / 2 && x <= XpaddlePosition + paddle_width / 2) {
-        if(dy < 0) {
-            ;
-        }
-        else {
-            dy = -dy;
-            dx -= dx/4;
+        dy = -dy;
+        if(dy**2 < YBallSpeed**2*5) {
+            dy = 1.1*dy;
         }
     }
-
-    if(dx == 0){
-        dx += 1;
-    }
-
-    // Update Score
-    scoreDisplay.textContent = "Score : " + Math.floor((Date.now() - start)/1000) + " s";
 }
 
 function resetGame() {
     x = canvas.width / 2;
     y = YpaddlePosition - 30;
+
+    XBallSpeed = 0;
+    while(XBallSpeed > -0.5 && XBallSpeed < 0.5) {
+        XBallSpeed = Math.random() * (4 - 2) + 2;
+    }
+
     if(Math.floor(Math.random() * 2) == 1) {
-        dx = ballSpeed/2;
+        dx = XBallSpeed;
     }
     else {
-        dx = -ballSpeed/2;
+        dx = -XBallSpeed;
     }
-    dy= -ballSpeed;
+    dy= -YBallSpeed;
 
     XpaddlePosition = canvas.width / 2;
-
-    scoreDisplay.textContent = "Score : " + 0 + " s";
 
     cancelAnimationFrame(animationGame);
 }
@@ -116,6 +133,7 @@ function game() {
 // Lancement du jeu
 newGameButton.addEventListener("click", () => {
     resetGame();
+    scoreDisplay.textContent = "Score : " + 0 + " s";
     start = Date.now();
     game();
 })
