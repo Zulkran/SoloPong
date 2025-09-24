@@ -9,8 +9,8 @@ const rightButton = document.getElementById("right");
 const paddle_thickness = 7;
 const paddle_width = 100;
 let XpaddlePosition = canvas.width / 2;
-const YpaddlePosition = canvas.height * (9.5/10);
-const paddle_speed = 10;
+const YpaddlePosition = canvas.height * (9.75/10);
+const paddle_speed = 8;
 const radius = paddle_thickness / 2;
 
 // Déplacement
@@ -23,6 +23,7 @@ let y = YpaddlePosition - 30;
 let dx;
 let dy;
 const rayonBall = 10;
+const ballSpeed = 3;
 
 // Animation Game
 let animationGame;
@@ -75,13 +76,18 @@ function update() {
         dy > 0 ? dy+=0.1 : dy-=0.1;
     }
     // Finish Game
-    else if (y + dy + rayonBall > canvas.height){
+    else if (y + rayonBall > canvas.height){
         resetGame();
     }
 
     // Changed Touch Bar
     if(y + rayonBall >= YpaddlePosition && y <= YpaddlePosition + paddle_thickness && x + rayonBall >= XpaddlePosition - paddle_width / 2 && x <= XpaddlePosition + paddle_width / 2) {
-        dy = -dy;
+        if(dy < 0) {
+            ;
+        }
+        else {
+            dy = -dy;
+        }
     }
 
     // Update Score
@@ -92,33 +98,30 @@ function resetGame() {
     x = canvas.width / 2;
     y = YpaddlePosition - 30;
     if(Math.floor(Math.random() * 2) == 1) {
-        dx = 4;
+        dx = ballSpeed;
     }
     else {
-        dx = -4;
+        dx = -ballSpeed;
     }
-    dy= -4;
+    dy= -ballSpeed;
 
     XpaddlePosition = canvas.width / 2;
 
-    compteur = 0;
-    timeScore = 0;
+    scoreDisplay.textContent = "Score : " + 0 + " s";
 
     cancelAnimationFrame(animationGame);
 }
 
 
 function game() {
+    animationGame = requestAnimationFrame(game);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     update();
     draw();
-
-    animationGame = requestAnimationFrame(game);
 }
 
 // Lancement du jeu
 newGameButton.addEventListener("click", () => {
-    scoreDisplay.textContent = "Score : " + 0 + " s";
     resetGame();
     start = Date.now();
     game();

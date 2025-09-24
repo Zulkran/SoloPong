@@ -23,7 +23,7 @@ main {
 }
 
 #pong {
-    border: 0.5rem solid rgb(218, 125, 255);
+    border: 0.25rem solid rgb(218, 125, 255);
     border-radius: 2rem;
     margin: 1.5rem auto;
     display: block;
@@ -43,6 +43,7 @@ main {
 
 #controls {
     margin: auto;
+    display: flex;
 }
 
 #newGame {
