@@ -25,6 +25,8 @@ let y = YpaddlePosition - 30;
 let dx;
 let dy;
 const rayonBall = 10;
+
+// Ball Speed
 let XBallSpeed;
 const YBallSpeed = 5;
 
