@@ -6,10 +6,10 @@ const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 
 // Player characteristics
-const paddle_thickness = 7;
-const paddle_width = 100;
+const paddle_thickness = 10;
+const paddle_width = 90;
 let XpaddlePosition = canvas.width / 2;
-const YpaddlePosition = canvas.height * (9.75/10);
+const YpaddlePosition = canvas.height * (9.70/10);
 const paddle_speed = 8;
 const radius = paddle_thickness / 2;
 
@@ -23,7 +23,7 @@ let y = YpaddlePosition - 30;
 let dx;
 let dy;
 const rayonBall = 10;
-const ballSpeed = 3;
+const ballSpeed = canvas.width / 100;
 
 // Animation Game
 let animationGame;
@@ -37,24 +37,12 @@ function draw() {
 
     ctx.arc(x, y, rayonBall, 0, Math.PI * 2, false);
     ctx.fillStyle = "rgb(192, 42, 252)";
-    ctx.fill();
 
     // Draw Bar 
-    ctx.fillRect(XpaddlePosition - paddle_width / 2, YpaddlePosition, paddle_width, paddle_thickness);
+    ctx.roundRect(XpaddlePosition - paddle_width / 2, YpaddlePosition, paddle_width, paddle_thickness, [radius]);
+    ctx.fill();
 
-    ctx.moveTo(XpaddlePosition - paddle_width / 2 + radius, YpaddlePosition); // Début à gauche
-    ctx.lineTo(XpaddlePosition + paddle_width / 2 - radius, YpaddlePosition); // Ligne droite
-    ctx.arcTo(
-        XpaddlePosition + paddle_width / 2, YpaddlePosition, 
-        XpaddlePosition + paddle_width / 2, YpaddlePosition + radius, 
-        radius
-    ); // Arrondi à droite
-    ctx.lineTo(XpaddlePosition - paddle_width / 2 + radius, YpaddlePosition + paddle_thickness); // Ligne en bas
-    ctx.arcTo(
-        XpaddlePosition - paddle_width / 2, YpaddlePosition + paddle_thickness, 
-        XpaddlePosition - paddle_width / 2, YpaddlePosition, 
-        radius
-    ); // Arrondi à gauche 
+    ctx.stroke();
 }
 
 function update() {
@@ -69,11 +57,11 @@ function update() {
     // Touch canvas border
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
-        dx > 0 ? dx+=0.1 : dx-=0.1;
+        dx > 0 && (dx <= ballSpeed*5 || -dx <= ballSpeed*5) ? dx+=0.1 : dx-=0.1;
     }
     else if (y + dy - rayonBall < 0) {
         dy = -dy;
-        dy > 0 ? dy+=0.1 : dy-=0.1;
+        dy > 0 && (dy <= ballSpeed*5 || -dy <= ballSpeed*5) ? dy+=0.1 : dy-=0.1;
     }
     // Finish Game
     else if (y + rayonBall > canvas.height){
