@@ -57,11 +57,11 @@ function update() {
     // Touch canvas border
     if(x + dx + rayonBall > canvas.width || x + dx - rayonBall < 0) {
         dx = -dx;
-        dx > 0 && (dx <= ballSpeed*5 || -dx <= ballSpeed*5) ? dx+=0.1 : dx-=0.1;
+        dx > 0 && (dx <= ballSpeed*5 || -dx <= ballSpeed*5) ? dx+=0.5 : dx-=0.5;
     }
     else if (y + dy - rayonBall < 0) {
         dy = -dy;
-        dy > 0 && (dy <= ballSpeed*5 || -dy <= ballSpeed*5) ? dy+=0.1 : dy-=0.1;
+        dy > 0 && (dy <= ballSpeed*5 || -dy <= ballSpeed*5) ? dy+=0.5 : dy-=0.5;
     }
     // Finish Game
     else if (y + rayonBall > canvas.height){
@@ -75,7 +75,12 @@ function update() {
         }
         else {
             dy = -dy;
+            dx -= dx/4;
         }
+    }
+
+    if(dx == 0){
+        dx += 1;
     }
 
     // Update Score
@@ -86,10 +91,10 @@ function resetGame() {
     x = canvas.width / 2;
     y = YpaddlePosition - 30;
     if(Math.floor(Math.random() * 2) == 1) {
-        dx = ballSpeed;
+        dx = ballSpeed/2;
     }
     else {
-        dx = -ballSpeed;
+        dx = -ballSpeed/2;
     }
     dy= -ballSpeed;
 
